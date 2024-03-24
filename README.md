@@ -9,5 +9,5 @@
 9. Run command 'Python3 app.py' to start the backend
 
 <hr>
-![Hills](images/Screenshot 2024-03-24 at 14-06-06 Vite React.png)
-![Signup](images/Screenshot 2024-03-24 at 14-06-36 Vite React.png)
+![alt text](images/hills_1.png)
+![alt text](images/signup_1.png)
