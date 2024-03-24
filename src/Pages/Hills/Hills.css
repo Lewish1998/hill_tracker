@@ -1,0 +1,9 @@
+h4 {
+    padding: 0;
+    margin: 0;
+}
+
+.hill-list-container{
+    background-color: rgba(50, 50, 50, 0.9);
+    border-radius: 6px;
+}

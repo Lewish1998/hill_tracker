@@ -1,0 +1,26 @@
+.form-component {
+    display: flex;
+    flex-direction: column;
+    padding: 6px;
+    gap: 2px;
+}
+
+.form-component input {
+    padding-bottom: 10px;
+    justify-content: center;
+}
+
+.form-component button {
+    margin-top: 20px;
+    width: 20vw;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-container {
+    background-color: rgb(99, 103, 107);
+    border: solid 2px rgb(216, 235, 212);
+    border-radius: 6px;
+    padding: 10px;
+}
+
