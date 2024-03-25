@@ -10,4 +10,4 @@
 
 <hr>
 ![alt text](images/hills_1.png)
-![alt text](images/signup_1.png)
+![alt text](signup_1.png)

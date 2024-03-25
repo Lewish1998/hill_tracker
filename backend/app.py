@@ -1,6 +1,7 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 CORS(app)
@@ -87,11 +88,12 @@ def create_hill():
 @app.route('/users', methods=['POST'])
 def create_user():
     data = request.json
+    hashed_password = generate_password_hash(data['password'])
     new_user = Users(
         firstname=data['firstname'],
         lastname=data['lastname'],
         email=data['email'],
-        password=data['password'],
+        password=hashed_password,
         email_update=data['emailUpdate']
     )
     db.session.add(new_user)
@@ -106,12 +108,23 @@ def login():
     
     user = Users.query.filter_by(email=email).first()
     
-    if user and user.password == password:
-        return jsonify({'message': 'Login successful', 'user_id': user.id}), 200
+    print(user)
+    
+    if user:
+        print(f"User: {user.password}")
+        if check_password_hash(user.password, password=password):
+          flash('Logged in successfully.')
+          return jsonify({'message': 'Login successful', 'user_id': user.id}), 200
     else:
+        flash('Invalid email or password.')
         return jsonify({'error': 'Invalid email or password'}), 401
 
 
 if __name__ == '__main__':
+    app.secret_key='dev'
+    app.config['SESSION_TYPE'] = 'filesystem'
+    
+    # sess.init_app(app)
+    
     app.run(debug=True)
     
