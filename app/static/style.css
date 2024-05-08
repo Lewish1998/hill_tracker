@@ -1,0 +1,74 @@
+/* Colours */
+:root {
+    --white: #f4f4f4;
+    --black: #212121;
+    --off-white: #faebd7;
+    --green-1: rgb(35, 160, 160);
+}
+
+html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    margin: 0px;
+}
+
+/* .navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 500px;
+}
+
+#nav-img {
+    height: 140px;
+    width: auto;
+    border: solid black;
+} */
+
+.navbar {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between; /* Change to space-between */
+    align-items: center;
+    background-color: var(--off-white);
+}
+
+#nav-img {
+    height: 200px;
+    width: auto;
+    border: solid var(--black);
+    /* {% comment %} <img id='nav-img' src="../static/logo-images/png/logo-black.png" alt="Summit Savvy Logo"> {% endcomment %} */
+}
+
+.nav-links {
+    display: flex;
+}
+
+.nav-links a {
+    margin-left: 20px;
+    margin-right: 2vw;
+    font-size: 20px;
+    color: var(--black);
+    text-decoration: none;
+}
+
+.nav-links a:hover {
+    color: var(--green-1);
+    text-decoration: underline;
+}
+
+.nav-links .active {
+    color: rgb(38, 137, 105);
+}
+
+/* @media screen and (max-width: 1000px) {
+    .nav-links a {
+        font-size: large;
+    }
+} */
+
+.main-container {
+    margin: 20px;
+}

@@ -8,12 +8,18 @@
     {% else %}
     <title>Hills</title>
     {% endif %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 <body>
-    <nav>
-        <a href="/">Home</a>
-        <a href="login">Login</a>
+    <nav class="navbar">
+        <h1>Summit Savvy</h1>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="login">Login</a>
+        </div>
     </nav>
+    <div class="main-container">
     {% block content %}{% endblock %}
+    </div>
 </body>
 </html>
