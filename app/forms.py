@@ -22,12 +22,14 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Register')
     
     def validate_username(self, username):
+        print("Username", username.data)
         user = db.session.scalar(sa.select(User).where(
             User.username == username.data))
         if user is not None:
             raise ValidationError('Please use a different username.')
         
     def validate_email(self, email):
+        print("Email", email.data)
         user = db.session.scalar(sa.select(User).where(
             User.email == email.data))
         if user is not None:

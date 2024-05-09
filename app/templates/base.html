@@ -15,9 +15,22 @@
         <h1>Summit Savvy</h1>
         <div class="nav-links">
             <a href="/">Home</a>
+            {% if current_user.is_anonymous %}
             <a href="login">Login</a>
+            {% else %}
+            <a href="">this is a test</a>
+            {% endif %}
         </div>
     </nav>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
     <div class="main-container">
     {% block content %}{% endblock %}
     </div>

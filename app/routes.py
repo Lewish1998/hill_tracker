@@ -8,7 +8,7 @@ from urllib.parse import urlsplit
 from datetime import datetime, timezone
 
 @app.route('/', methods=['GET', 'POST'])
-# @login_required
+@login_required
 def index():
     return render_template('index.html', title="Home")
 
@@ -34,14 +34,23 @@ def logout():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    print("testing:")
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
+        print("Validate successful")
+        print("Form submitted successfully!")
+        print("Username:", form.username.data)
+        print("Email:", form.email.data)
+        print("Password:", form.password.data)
+        print("Password Confirm:", form.password2.data)
+        
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
         flash("Account created. Please log in")
         return redirect(url_for('login'))
+    print("Failed to validate")
     return render_template('register.html', title='Register', form=form)
