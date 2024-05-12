@@ -14,7 +14,8 @@ from datetime import datetime, timezone
 @login_required
 def index():
     last_hill = Hill.query.filter_by(user_id=current_user.id).order_by(Hill.id.desc()).first()
-    return render_template('index.html', title="Home", last_hill=last_hill)
+    username = current_user.username.title()
+    return render_template('index.html', title="Home", last_hill=last_hill, username=username)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
