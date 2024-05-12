@@ -1,0 +1,19 @@
+.hills-container {
+    text-align: center;
+}
+
+.your-hills {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+}
+
+.your-hills li {
+    list-style: none;
+}
+
+.single-hill {
+    border: black solid 1px;
+    margin: 10px;
+}

@@ -1,0 +1,19 @@
+.ui-autocomplete {
+    background-color: var(--off-white);
+    padding: 10px;
+    border-radius: 5px;
+    list-style: none;
+    max-width: 400px;
+}
+
+.ui-autocomplete li:hover {
+    background-color: var(--green-2);
+    padding: 3px;
+    cursor: pointer;
+    color: black;
+    border-radius: 3px;
+}
+
+.ui-autocomplete a {
+    color: black;
+}

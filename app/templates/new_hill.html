@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='new-hill.css') }}" />
+<h1>Add New Hill</h1>
+<form action="" method="post" novalidate>
+
+    {{ form.hidden_tag() }}
+
+
+    <p>
+        {{ form.title.label }}
+        {{ form.title(size=32, value=hill_data.title if hill_data else '') }}
+        {% for error in form.title.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.distance.label }} (km)
+        {{ form.distance(size=32, value=hill_data.distance if hill_data else '') }}
+        {% for error in form.distance.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.height.label }} (m)
+        {{ form.height(size=32, value=hill_data.height if hill_data else '') }}
+        {% for error in form.height.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.latitude.label }}
+        {{ form.latitude(size=32, value=hill_data.latitude if hill_data else '') }}
+        {% for error in form.latitude.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
+        {{ form.longitude.label }}
+        {{ form.longitude(size=32, value=hill_data.longitude if hill_data else '') }}
+        {% for error in form.longitude.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>{{ form.submit() }}</p>
+</form>
+
+{% set hill_titles = [] %}
+{% for hill in all_hills %}
+    {% set _ = hill_titles.append(hill.title) %}
+{% endfor %}
+
+<script>
+    $(function() { 
+        var availableTags = {{ hill_titles|safe }}; 
+        $("#title").autocomplete({ 
+            source: availableTags,
+            select: function(event, ui) {
+                var selectedHill = ui.item.value;
+                $.ajax({
+                    url: '/api/hill_data',
+                    method: 'GET', 
+                    success: function(response) {
+                        var selectedHillData = response.find(function(hill) {
+                            return hill.title === selectedHill;
+                        });
+                        if (selectedHillData) {
+                            $("#distance").val(selectedHillData.distance);
+                            $("#height").val(selectedHillData.height);
+                            $("#latitude").val(selectedHillData.latitude);
+                            $("#longitude").val(selectedHillData.longitude);
+                        } else {
+                            console.error('Selected hill not found in response');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error fetching hill data:', error);
+                    }
+                });
+            }
+        }); 
+    });
+</script>
+
+{% endblock %}

@@ -8,6 +8,12 @@
     {% else %}
     <title>Hills</title>
     {% endif %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js">   
+    </script>   
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js">   
+    </script>   
+    
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 <body>
@@ -18,7 +24,9 @@
             {% if current_user.is_anonymous %}
             <a href="login">Login</a>
             {% else %}
-            <a href="">this is a test</a>
+            <a href="/hills">Hills</a>
+            <a href="/account">Account</a>
+            <a href="/logout">Logout</a>
             {% endif %}
         </div>
     </nav>

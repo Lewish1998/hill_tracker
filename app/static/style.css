@@ -3,7 +3,8 @@
     --white: #f4f4f4;
     --black: #212121;
     --off-white: #faebd7;
-    --green-1: rgb(35, 160, 160);
+    --green-1: rgb(35, 160, 93);
+    --green-2: rgb(44, 203, 118);
 }
 
 html {
@@ -55,7 +56,6 @@ body {
 }
 
 .nav-links a:hover {
-    color: var(--green-1);
     text-decoration: underline;
 }
 
@@ -63,12 +63,15 @@ body {
     color: rgb(38, 137, 105);
 }
 
-/* @media screen and (max-width: 1000px) {
-    .nav-links a {
-        font-size: large;
-    }
-} */
 
 .main-container {
     margin: 20px;
+}
+
+a {
+    color: var(--green-1);
+}
+
+a:hover {
+    color: var(--green-2);
 }

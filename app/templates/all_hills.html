@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='all_hills.css') }}" />
+<div class='all-hills-container'>
+    <h1>All Hills</h1>
+    <p>Click on a hill to log it</p>
+    <hr>
+    <label for="hills">Order by</label>
+    <select name="hills" id="hills">
+        <option value="title-asc">A-Z</option>
+        <option value="title-desc">Z-A</option>
+        <option value="distance-desc">Distance High to Low</option>
+        <option value="distance-asc">Distance Low to High</option>
+        <option value="height-desc">Height High to Low</option>
+        <option value="height-asc">Height Low to High</option>
+    </select>
+    <div class="all-hills-list">
+        <ul id="hill-list">
+            {% for hill in hills %}
+            <a href="{{ url_for('add_new_hill', hill_id=hill.id)}}">
+                <li>
+                    <h4>{{ hill.title }}</h4>
+                    <p>Height: {{ hill.height }}m</p>
+                    <p>Distance: {{ hill.distance }}km</p>
+                </li>
+            </a>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var hillsList = document.getElementById('hill-list');
+        var hills = Array.from(hillsList.children);
+
+        function sortHills(selectedOption) {
+            hills.sort(function(a, b) {
+                var aValue, bValue;
+                switch(selectedOption) {
+                    case 'title-asc':
+                    case 'title-desc':
+                        aValue = a.querySelector('h4').innerText.toLowerCase();
+                        bValue = b.querySelector('h4').innerText.toLowerCase();
+                        return selectedOption === 'title-asc' ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+                    case 'distance-desc':
+                    case 'distance-asc':
+                        aValue = parseFloat(a.querySelector('p:nth-of-type(2)').innerText.split(':')[1]);
+                        bValue = parseFloat(b.querySelector('p:nth-of-type(2)').innerText.split(':')[1]);
+                        return selectedOption === 'distance-desc' ? bValue - aValue : aValue - bValue;
+                    case 'height-desc':
+                    case 'height-asc':
+                        aValue = parseFloat(a.querySelector('p:first-of-type').innerText.split(':')[1]);
+                        bValue = parseFloat(b.querySelector('p:first-of-type').innerText.split(':')[1]);
+                        return selectedOption === 'height-desc' ? bValue - aValue : aValue - bValue;
+                    default:
+                        return 0;
+                }
+            });
+            hills.forEach(function(hill) {
+                hillsList.appendChild(hill);
+            });
+        }
+
+        var dropdown = document.getElementById('hills');
+        dropdown.addEventListener('change', function() {
+            var selectedOption = dropdown.value;
+            sortHills(selectedOption);
+        });
+
+        // Initially sort based on the default selected option
+        var defaultOption = dropdown.value;
+        sortHills(defaultOption);
+    });
+</script>
+
+{% endblock %}

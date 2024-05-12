@@ -1,6 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
-<div>
+<link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}" />
+<div class='index-container'>
     <h1>Home</h1>
+    <div class="your-hills">
+        {% if last_hill %}
+            <p>The last hill you logged was <b>{{ last_hill.title }}</b></h3>
+            <p>Height: {{ last_hill.height}}m</p>
+            <p>Distance: {{ last_hill.distance }}km</p>
+        {% else %}
+        <h4>You have not logged any hills yet.</h4>
+        {% endif %}
+    </div>
+    <hr>
+    <h2>Want to check out more hills?</h2>
+    <p></p>
+    <a href="/all_hills"><button>View All Hills</button></a>
 </div>
 {% endblock %}

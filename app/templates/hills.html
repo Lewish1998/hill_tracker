@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='hills.css') }}" />
+<div class="hills-container">
+    <h1>Hills</h1>
+    <h3>Track the hills you've climbed here</h3>
+    <p><i>View all hills, plan future hills and more in future update!</i></p>
+    <a href="{{ url_for('add_new_hill') }}">
+        <button>Add a new hill</button>
+    </a>
+    <hr>
+    <div class="your-hills-container">
+        <p>Number of hills logged: {{ hills|length }}</p>
+        <h2>Your Hills:</h2>
+        <div class="your-hills">
+            {% for hill in hills %}
+                <ul class='single-hill'>
+                    <li><h3>{{ hill.title }}</h3></li>
+                    <li><p>Height: {{ hill.height if hill.height else '-'}}{{ 'm' if hill.height else '' }}</p></li>
+                    <li><p>Distance: {{ hill.distance if hill.distance else '-'}}{{ 'km' if hill.height else '' }}</p></li>
+                    <li><p>Latitude: {{ hill.latitude if hill.latitude else '-'}}{{ '°N' if hill.latitude else '' }}</p></li>
+                    <li><p>Longitude: {{ hill.longitude if hill.longitude else '-'}}{{ '°W' if hill.longitude else '' }}</p></li>
+                    <a href="{{ url_for('edit_hill', hill_id=hill.id) }}">Edit</a>
+                    <a href="{{ url_for('delete_hill', hill_id=hill.id) }}" onclick="return confirmDelete();" style="color: red;">Delete</a>
+                </ul>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<script>
+    function confirmDelete() {
+        return confirm("Are you sure you want to delete this hill?");
+    }
+</script>
+
+{% endblock %}
