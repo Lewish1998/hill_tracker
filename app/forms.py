@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, DecimalField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, DecimalField, TimeField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length, Optional
 import sqlalchemy as sa
 from app import db
@@ -42,8 +42,18 @@ class AddNewHillForm(FlaskForm):
     height = DecimalField('Height', places=2, validators=[Optional()])
     latitude = DecimalField('Latitude', validators=[Optional()])
     longitude = DecimalField('Longitude', validators=[Optional()])
-    # time = 
+    time = StringField('Time', validators=[Optional()])
     submit = SubmitField('Add')
+    
+    def validate_time(form, field):
+        if field.data:
+            parts = field.data.split(':')
+            if len(parts) != 3:
+                raise ValidationError('Time must be in format H:M:S')
+            for part in parts:
+                if not part.isdigit():
+                    raise ValidationError('Time must be in format H:M:S')
+
 
 
 class EditHillForm(FlaskForm):

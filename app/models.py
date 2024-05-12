@@ -34,7 +34,7 @@ class Hill(db.Model):
     title: so.Mapped[str] = so.mapped_column(sa.String(255), index=True)
     distance: so.Mapped[str] = so.mapped_column(sa.Float(255), index=True, nullable=True)
     height: so.Mapped[Optional[str]] = so.mapped_column(sa.Float(255), index=True, nullable=True)
-    time: so.Mapped[str] = so.mapped_column(sa.Interval, index=True, nullable=True)
+    time: so.Mapped[Optional[str]] = so.mapped_column(sa.String(20), index=True, nullable=True)
     latitude: so.Mapped[str] = so.mapped_column(sa.Float(255), index=True, nullable=True)
     longitude: so.Mapped[str] = so.mapped_column(sa.Float(255), index=True, nullable=True)
     

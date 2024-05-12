@@ -86,6 +86,7 @@ def add_new_hill():
             title=form.title.data, 
             distance=form.distance.data or 0,
             height=form.height.data or 0,
+            time=form.time.data or 0,
             latitude=form.latitude.data or 0,
             longitude=form.longitude.data or 0,
             user_id=current_user.id

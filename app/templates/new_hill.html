@@ -29,6 +29,13 @@
         {% endfor %}
     </p>
     <p>
+        {{ form.time.label }}(H:M:S)
+        {{ form.time}}
+        {% for error in form.time.errors %}
+        <span style="color: red;">[{{ error }}]</span>
+        {% endfor %}
+    </p>
+    <p>
         {{ form.latitude.label }}
         {{ form.latitude(size=32, value=hill_data.latitude if hill_data else '') }}
         {% for error in form.latitude.errors %}

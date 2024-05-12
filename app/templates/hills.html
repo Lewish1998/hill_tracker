@@ -18,7 +18,8 @@
                     <li><h3>{{ hill.title }}</h3></li>
                     <li><p>Height: {{ hill.height if hill.height else '-'}}{{ 'm' if hill.height else '' }}</p></li>
                     <li><p>Distance: {{ hill.distance if hill.distance else '-'}}{{ 'km' if hill.height else '' }}</p></li>
-                    <li><p>Latitude: {{ hill.latitude if hill.latitude else '-'}}{{ '°N' if hill.latitude else '' }}</p></li>
+                    <li><p>Distance: {{ hill.distance if hill.distance else '-'}}{{ 'km' if hill.height else '' }}</p></li>
+                    <li><p>Time: {{ hill.time if hill.latitude else '-'}}{{ 'M:H:S' if hill.time else '' }}</p></li>
                     <li><p>Longitude: {{ hill.longitude if hill.longitude else '-'}}{{ '°W' if hill.longitude else '' }}</p></li>
                     <a href="{{ url_for('edit_hill', hill_id=hill.id) }}">Edit</a>
                     <a href="{{ url_for('delete_hill', hill_id=hill.id) }}" onclick="return confirmDelete();" style="color: red;">Delete</a>
