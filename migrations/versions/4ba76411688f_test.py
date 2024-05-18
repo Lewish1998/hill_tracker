@@ -1,8 +1,8 @@
-"""init
+"""test
 
-Revision ID: d65b59ec2b17
+Revision ID: 4ba76411688f
 Revises: 
-Create Date: 2024-05-12 03:25:17.008070
+Create Date: 2024-05-17 14:06:31.049165
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'd65b59ec2b17'
+revision = '4ba76411688f'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,6 +23,7 @@ def upgrade():
     sa.Column('title', sa.String(length=255), nullable=False),
     sa.Column('distance', sa.Float(), nullable=False),
     sa.Column('height', sa.Float(), nullable=False),
+    sa.Column('difficulty', sa.String(length=255), nullable=False),
     sa.Column('latitude', sa.Float(), nullable=False),
     sa.Column('longitude', sa.Float(), nullable=False),
     sa.PrimaryKeyConstraint('id')
@@ -31,7 +32,7 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('username', sa.String(length=64), nullable=False),
     sa.Column('email', sa.String(length=120), nullable=False),
-    sa.Column('password_hash', sa.String(length=255), nullable=True),
+    sa.Column('password_hash', sa.String(length=256), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     with op.batch_alter_table('users', schema=None) as batch_op:
@@ -43,7 +44,7 @@ def upgrade():
     sa.Column('title', sa.String(length=255), nullable=False),
     sa.Column('distance', sa.Float(), nullable=True),
     sa.Column('height', sa.Float(), nullable=True),
-    sa.Column('time', sa.String(length=20), nullable=True),
+    sa.Column('time', sa.Time(), nullable=True),
     sa.Column('latitude', sa.Float(), nullable=True),
     sa.Column('longitude', sa.Float(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=True),

@@ -1,10 +1,10 @@
 /* Colours */
 :root {
-    --white: #f4f4f4;
-    --black: #212121;
-    --off-white: #faebd7;
-    --green-1: rgb(35, 160, 93);
-    --green-2: rgb(44, 203, 118);
+    --white: #ffffff;
+    --black: #000000;
+    --off-white: #d2f7e8;
+    --green-1: #2ebeab;
+    --green-2: #05d0b5;
 }
 
 html {
@@ -15,25 +15,16 @@ body {
     margin: 0px;
 }
 
-/* .navbar {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    max-width: 500px;
-}
-
-#nav-img {
-    height: 140px;
-    width: auto;
-    border: solid black;
-} */
-
 .navbar {
-    padding: 20px;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    padding-left: 20px;
     display: flex;
     justify-content: space-between; /* Change to space-between */
     align-items: center;
     background-color: var(--off-white);
+
 }
 
 #nav-img {
@@ -45,6 +36,8 @@ body {
 
 .nav-links {
     display: flex;
+    padding-right: 30px;
+
 }
 
 .nav-links a {
@@ -53,6 +46,7 @@ body {
     font-size: 20px;
     color: var(--black);
     text-decoration: none;
+    transition: 100ms;
 }
 
 .nav-links a:hover {
@@ -66,10 +60,12 @@ body {
 
 .main-container {
     margin: 20px;
+    margin-top: 100px;
 }
 
 a {
     color: var(--green-1);
+    transition: 1000ms;
 }
 
 a:hover {

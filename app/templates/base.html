@@ -17,19 +17,21 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 <body>
-    <nav class="navbar">
-        <h1>Summit Savvy</h1>
-        <div class="nav-links">
-            <a href="/">Home</a>
-            {% if current_user.is_anonymous %}
-            <a href="login">Login</a>
-            {% else %}
-            <a href="/hills">Hills</a>
-            <a href="/account">Account</a>
-            <a href="/logout">Logout</a>
-            {% endif %}
-        </div>
-    </nav>
+    <div class="nav-container">
+        <nav class="navbar">
+            <h1>Summit Savvy</h1>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                {% if current_user.is_anonymous %}
+                <a href="login">Login</a>
+                {% else %}
+                <a href="/hills">Hills</a>
+                <a href="/account">Account</a>
+                <a href="/logout">Logout</a>
+                {% endif %}
+            </div>
+        </nav>
+    </div>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     <ul>

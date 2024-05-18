@@ -1,5 +1,6 @@
 import os
 import json
+from datetime import time
 from flask import render_template, flash, redirect, url_for, request, jsonify
 from app import app, db
 from app.forms import LoginForm, RegistrationForm,AddNewHillForm, EditHillForm
@@ -69,6 +70,37 @@ def account():
                            total_height=total_height)
 
 
+# @login_required
+# @app.route('/hills/new', methods=['POST', 'GET'])
+# def add_new_hill():
+#     all_hills = HillInfo.query.all()
+#     hill_id = request.args.get('hill_id')
+#     hill_data = None
+#     if hill_id:
+#         hill_data = HillInfo.query.filter_by(id=hill_id).first()
+#     form = AddNewHillForm()
+#     if form.validate_on_submit():
+#         existing_hill = Hill.query.filter(func.lower(Hill.title) == func.lower(form.title.data), Hill.user_id == current_user.id).first()
+#         if existing_hill:
+#             flash("Looks like you've already logged this hill")
+#             return redirect(url_for('add_new_hill')) 
+#         hill = Hill(
+#             title=form.title.data, 
+#             distance=form.distance.data or 0,
+#             height=form.height.data or 0,
+#             time=form.time.data or 0,
+#             latitude=form.latitude.data or 0,
+#             longitude=form.longitude.data or 0,
+#             user_id=current_user.id
+#             )
+#         db.session.add(hill)
+#         db.session.commit()
+#         flash("Hill added")
+#         return redirect(url_for('hills'))
+#     return render_template('new_hill.html', form=form, all_hills=all_hills, hill_data=hill_data)
+
+from datetime import time  # Import the 'time' class from the 'datetime' module
+
 @login_required
 @app.route('/hills/new', methods=['POST', 'GET'])
 def add_new_hill():
@@ -83,20 +115,27 @@ def add_new_hill():
         if existing_hill:
             flash("Looks like you've already logged this hill")
             return redirect(url_for('add_new_hill')) 
+        # Convert the time string to a valid time object
+        # try:
+        #     time_data = time.fromisoformat(form.time.data)
+        # except ValueError:
+        #     flash("Invalid time format. Please enter time in HH:MM:SS format.")
+            return redirect(url_for('add_new_hill'))
         hill = Hill(
             title=form.title.data, 
             distance=form.distance.data or 0,
             height=form.height.data or 0,
-            time=form.time.data or 0,
+            time=form.time.data or None,
             latitude=form.latitude.data or 0,
             longitude=form.longitude.data or 0,
             user_id=current_user.id
-            )
+        )
         db.session.add(hill)
         db.session.commit()
         flash("Hill added")
         return redirect(url_for('hills'))
     return render_template('new_hill.html', form=form, all_hills=all_hills, hill_data=hill_data)
+
 
 
 @app.route('/api/hill_data', methods=['GET'])

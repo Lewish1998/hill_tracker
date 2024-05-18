@@ -1,0 +1,17 @@
+.register-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-form input {
+    width: 30vw;
+}
+
+@media screen and (max-width: 1100px) {
+    #hill-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}   

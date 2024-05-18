@@ -2,6 +2,7 @@ from datetime import datetime, timezone
 from typing import Optional
 import sqlalchemy as sa
 import sqlalchemy.orm as so
+
 from app import db, login, app
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
@@ -34,7 +35,7 @@ class Hill(db.Model):
     title: so.Mapped[str] = so.mapped_column(sa.String(255), index=True)
     distance: so.Mapped[str] = so.mapped_column(sa.Float(255), index=True, nullable=True)
     height: so.Mapped[Optional[str]] = so.mapped_column(sa.Float(255), index=True, nullable=True)
-    time: so.Mapped[Optional[str]] = so.mapped_column(sa.String(20), index=True, nullable=True)
+    time: so.Mapped[Optional[str]] = so.mapped_column(sa.Time, index=True, nullable=True)
     latitude: so.Mapped[str] = so.mapped_column(sa.Float(255), index=True, nullable=True)
     longitude: so.Mapped[str] = so.mapped_column(sa.Float(255), index=True, nullable=True)
     
@@ -49,5 +50,6 @@ class HillInfo(db.Model):
     title = db.Column(db.String(255), nullable=False)
     distance = db.Column(db.Float, nullable=False)
     height = db.Column(db.Float, nullable=False)
+    difficulty = db.Column(db.String(255), nullable=False)
     latitude = db.Column(db.Float, nullable=False)
     longitude = db.Column(db.Float, nullable=False)

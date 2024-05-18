@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='hills.css') }}" />
 <div class="hills-container">
     <h1>Hills</h1>
+    <hr>
     <h3>Track the hills you've climbed here</h3>
     <p><i>View all hills, plan future hills and more in future update!</i></p>
     <a href="{{ url_for('add_new_hill') }}">
@@ -13,18 +14,23 @@
         <p>Number of hills logged: {{ hills|length }}</p>
         <h2>Your Hills:</h2>
         <div class="your-hills">
+            <ul class='your-hill-list'>
             {% for hill in hills %}
-                <ul class='single-hill'>
                     <li><h3>{{ hill.title }}</h3></li>
                     <li><p>Height: {{ hill.height if hill.height else '-'}}{{ 'm' if hill.height else '' }}</p></li>
-                    <li><p>Distance: {{ hill.distance if hill.distance else '-'}}{{ 'km' if hill.height else '' }}</p></li>
-                    <li><p>Distance: {{ hill.distance if hill.distance else '-'}}{{ 'km' if hill.height else '' }}</p></li>
-                    <li><p>Time: {{ hill.time if hill.latitude else '-'}}{{ 'M:H:S' if hill.time else '' }}</p></li>
+                    <li><p>Distance: {{ hill.distance if hill.distance else '-'}}{{ 'km' if hill.distance else '' }}</p></li>
+                    <li><p>Time: {{ hill.time if hill.latitude else '-'}}</p></li>
+                    {% if hill.distance and hill.time %}
+                    <li><p>Pace: 0km/h</p></li>
+                    {% else %}
+                    <li><p>Pace: -</p></li>
+                    {% endif %}
                     <li><p>Longitude: {{ hill.longitude if hill.longitude else '-'}}{{ '°W' if hill.longitude else '' }}</p></li>
                     <a href="{{ url_for('edit_hill', hill_id=hill.id) }}">Edit</a>
                     <a href="{{ url_for('delete_hill', hill_id=hill.id) }}" onclick="return confirmDelete();" style="color: red;">Delete</a>
-                </ul>
             {% endfor %}
+            </ul>
+
         </div>
     </div>
 </div>

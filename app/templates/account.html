@@ -1,17 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Account</h1>
-<p>Username: {{ user.username}}</p>
-<p>Email: {{ user.email }}</p>
-<hr>
-<h3>Stats</h3>
-{% if hills %}
-{% set highest_hill = hills|max(attribute='height') %}
-{% set longest_hill = hills|max(attribute='distance') %}
-    <p>Number of hills logged: {{ hills|length }}</p>
-    <p>Highest hill: {{ highest_hill.height }}m</p>
-    <p>Longest hill: {{ longest_hill.distance }}km</p>
-    <p>Total distance: {{ total_distance }}km</p>
-    <p>Total height: {{ total_height }}m</p>
-{% endif %}
+<link rel="stylesheet" href="{{ url_for('static', filename='account.css') }}" />
+<div class="account-container">
+    <h1>Account</h1>
+    <hr>
+    <p>Username: {{ user.username}}</p>
+    <p>Email: {{ user.email }}</p>
+    <hr>
+    <h3>Stats</h3>
+    {% if hills %}
+    {% set highest_hill = hills|max(attribute='height') %}
+    {% set longest_hill = hills|max(attribute='distance') %}
+        <p>Number of hills logged: {{ hills|length }}</p>
+        <p>Highest hill: {{ highest_hill.height }}m</p>
+        <p>Longest hill: {{ longest_hill.distance }}km</p>
+        <p>Total distance: {{ total_distance }}km</p>
+        <p>Total height: {{ total_height }}m</p>
+    {% endif %}
+</div>
 {% endblock %}

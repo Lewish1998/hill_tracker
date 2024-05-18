@@ -1,61 +1,64 @@
 {% extends "base.html" %}
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='new-hill.css') }}" />
-<h1>Add New Hill</h1>
-<form action="" method="post" novalidate>
+<div class="new-hill-container">
+    <h1>Add New Hill</h1>
+    <hr>
+    <form action="" method="post" novalidate>
 
-    {{ form.hidden_tag() }}
+        {{ form.hidden_tag() }}
 
 
-    <p>
-        {{ form.title.label }}
-        {{ form.title(size=32, value=hill_data.title if hill_data else '') }}
-        {% for error in form.title.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-    </p>
-    <p>
-        {{ form.distance.label }} (km)
-        {{ form.distance(size=32, value=hill_data.distance if hill_data else '') }}
-        {% for error in form.distance.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-    </p>
-    <p>
-        {{ form.height.label }} (m)
-        {{ form.height(size=32, value=hill_data.height if hill_data else '') }}
-        {% for error in form.height.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-    </p>
-    <p>
-        {{ form.time.label }}(H:M:S)
-        {{ form.time}}
-        {% for error in form.time.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-    </p>
-    <p>
-        {{ form.latitude.label }}
-        {{ form.latitude(size=32, value=hill_data.latitude if hill_data else '') }}
-        {% for error in form.latitude.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-    </p>
-    <p>
-        {{ form.longitude.label }}
-        {{ form.longitude(size=32, value=hill_data.longitude if hill_data else '') }}
-        {% for error in form.longitude.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-    </p>
-    <p>{{ form.submit() }}</p>
-</form>
+        <p>
+            {{ form.title.label }}
+            {{ form.title(size=32, value=hill_data.title if hill_data else '') }}
+            {% for error in form.title.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.distance.label }} (km)
+            {{ form.distance(size=32, value=hill_data.distance if hill_data else '') }}
+            {% for error in form.distance.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.height.label }} (m)
+            {{ form.height(size=32, value=hill_data.height if hill_data else '') }}
+            {% for error in form.height.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.time.label }} (h:m:s)
+            {{ form.time(size=32) }}
+            {% for error in form.time.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>    
+        <p>
+            {{ form.latitude.label }}
+            {{ form.latitude(size=32, value=hill_data.latitude if hill_data else '') }}
+            {% for error in form.latitude.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.longitude.label }}
+            {{ form.longitude(size=32, value=hill_data.longitude if hill_data else '') }}
+            {% for error in form.longitude.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
 
-{% set hill_titles = [] %}
-{% for hill in all_hills %}
-    {% set _ = hill_titles.append(hill.title) %}
-{% endfor %}
+    {% set hill_titles = [] %}
+    {% for hill in all_hills %}
+        {% set _ = hill_titles.append(hill.title) %}
+    {% endfor %}
+</div>
 
 <script>
     $(function() { 

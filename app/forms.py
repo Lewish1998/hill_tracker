@@ -45,14 +45,14 @@ class AddNewHillForm(FlaskForm):
     time = StringField('Time', validators=[Optional()])
     submit = SubmitField('Add')
     
-    def validate_time(form, field):
-        if field.data:
-            parts = field.data.split(':')
-            if len(parts) != 3:
-                raise ValidationError('Time must be in format H:M:S')
-            for part in parts:
-                if not part.isdigit():
-                    raise ValidationError('Time must be in format H:M:S')
+    # def validate_time(form, field):
+    #     if field.data:
+    #         parts = field.data.split(':')
+    #         if len(parts) != 3:
+    #             raise ValidationError('Time must be in format H:M:S')
+    #         for part in parts:
+    #             if not part.isdigit():
+    #                 raise ValidationError('Time must be in format H:M:S')
 
 
 
