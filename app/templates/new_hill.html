@@ -4,49 +4,46 @@
 <div class="new-hill-container">
     <h1>Add New Hill</h1>
     <hr>
-    <form action="" method="post" novalidate>
-
+    <form action="" method="post" novalidate class="new-hill-form">
         {{ form.hidden_tag() }}
-
-
         <p>
-            {{ form.title.label }}
-            {{ form.title(size=32, value=hill_data.title if hill_data else '') }}
+            {{ form.title.label }}<br>
+            {{ form.title(size=32, value=hill_data.title if hill_data else '') }}<br>
             {% for error in form.title.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.distance.label }} (km)
-            {{ form.distance(size=32, value=hill_data.distance if hill_data else '') }}
+            {{ form.distance.label }} (km)<br>
+            {{ form.distance(size=32, value=hill_data.distance if hill_data else '') }}<br>
             {% for error in form.distance.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.height.label }} (m)
-            {{ form.height(size=32, value=hill_data.height if hill_data else '') }}
+            {{ form.height.label }} (m)<br>
+            {{ form.height(size=32, value=hill_data.height if hill_data else '') }}<br>
             {% for error in form.height.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.time.label }} (h:m:s)
-            {{ form.time(size=32) }}
+            {{ form.time.label }} (h:m:s)<br>
+            {{ form.time(size=32) }}<br>
             {% for error in form.time.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>    
         <p>
-            {{ form.latitude.label }}
-            {{ form.latitude(size=32, value=hill_data.latitude if hill_data else '') }}
+            {{ form.latitude.label }}<br>
+            {{ form.latitude(size=32, value=hill_data.latitude if hill_data else '') }}<br>
             {% for error in form.latitude.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.longitude.label }}
-            {{ form.longitude(size=32, value=hill_data.longitude if hill_data else '') }}
+            {{ form.longitude.label }}<br>
+            {{ form.longitude(size=32, value=hill_data.longitude if hill_data else '') }}<br>       
             {% for error in form.longitude.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
