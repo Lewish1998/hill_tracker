@@ -14,22 +14,20 @@ class LoginForm(FlaskForm):
     
     
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
+    username = StringField('Username', validators=[DataRequired(), Length(min=4, message='Username must be at least 4 characters long')])
     email = StringField('Email', validators=[DataRequired(), Email()])
-    password = PasswordField('Password', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=8, message='Password must be at least 8 characters long')])
     password2 = PasswordField(
         'Password Confirm', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Register')
     
     def validate_username(self, username):
-        print("Username", username.data)
         user = db.session.scalar(sa.select(User).where(
             User.username == username.data))
         if user is not None:
             raise ValidationError('Please use a different username.')
         
     def validate_email(self, email):
-        print("Email", email.data)
         user = db.session.scalar(sa.select(User).where(
             User.email == email.data))
         if user is not None:
@@ -45,16 +43,6 @@ class AddNewHillForm(FlaskForm):
     time = StringField('Time', validators=[Optional()])
     submit = SubmitField('Add')
     
-    # def validate_time(form, field):
-    #     if field.data:
-    #         parts = field.data.split(':')
-    #         if len(parts) != 3:
-    #             raise ValidationError('Time must be in format H:M:S')
-    #         for part in parts:
-    #             if not part.isdigit():
-    #                 raise ValidationError('Time must be in format H:M:S')
-
-
 
 class EditHillForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
@@ -62,5 +50,4 @@ class EditHillForm(FlaskForm):
     height = DecimalField('Height', places=2, validators=[Optional()])
     latitude = DecimalField('Latitude', validators=[Optional()])
     longitude = DecimalField('Longitude', validators=[Optional()])
-    # time = 
     submit = SubmitField('Save Changes')

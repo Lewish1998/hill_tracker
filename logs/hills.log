@@ -111,3 +111,11 @@ Traceback (most recent call last):
 AttributeError: 'AnonymousUserMixin' object has no attribute 'id'
 2024-05-19 14:00:27,121, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
 2024-05-19 14:00:27,121, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
+2024-05-19 14:06:44,527, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
+2024-05-19 14:06:44,543, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
+2024-05-19 14:07:49,305, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
+2024-05-19 14:07:49,360, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
+2024-05-19 14:11:50,654, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
+2024-05-19 14:11:50,742, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
+2024-05-19 21:33:29,405, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
+2024-05-19 21:33:29,405, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
