@@ -43,3 +43,7 @@
         grid-template-columns: 1fr;
     }
 }
+
+.all-hills-container {
+    text-align: center  ;
+}

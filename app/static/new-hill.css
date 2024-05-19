@@ -21,3 +21,8 @@
 .ui-autocomplete a {
     color: black;
 }
+
+.new-hill-form input {
+    max-width: 20vw;
+    min-width: 200px;
+}   
