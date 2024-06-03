@@ -1,10 +1,12 @@
-2024-05-19 12:32:13,368, ERROR: Exception on /hills [GET] [in /Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/flask/app.py:1414]
+2024-05-28 22:27:24,107, ERROR: Exception on /login [POST] [in /Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/flask/app.py:1414]
 Traceback (most recent call last):
   File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1971, in _exec_single_context
     self.dialect.do_execute(
   File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 919, in do_execute
     cursor.execute(statement, parameters)
-psycopg2.OperationalError: SSL connection has been closed unexpectedly
+psycopg2.errors.UndefinedTable: relation "users" does not exist
+LINE 2: FROM users 
+             ^
 
 
 The above exception was the direct cause of the following exception:
@@ -22,38 +24,13 @@ Traceback (most recent call last):
   File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/flask/app.py", line 1469, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/lewis/Desktop/hill_tracker/app/routes.py", line 59, in hills
-    hills = Hill.query.filter_by(user_id=current_user.id).all()
-                                         ^^^^^^^^^^^^^^^
-  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/werkzeug/local.py", line 311, in __get__
-    obj = instance._get_current_object()
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/werkzeug/local.py", line 515, in _get_current_object
-    return get_name(local())
-                    ^^^^^^^
-  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/flask_login/utils.py", line 25, in <lambda>
-    current_user = LocalProxy(lambda: _get_user())
-                                      ^^^^^^^^^^^
-  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/flask_login/utils.py", line 372, in _get_user
-    current_app.login_manager._load_user()
-  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/flask_login/login_manager.py", line 364, in _load_user
-    user = self._user_callback(user_id)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/lewis/Desktop/hill_tracker/app/models.py", line 15, in load_user
-    return db.session.get(User, int(id))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/orm/scoping.py", line 1060, in get
-    return self._proxied.get(
+  File "/Users/lewis/Desktop/hill_tracker/app/routes.py", line 27, in login
+    user = db.session.scalar(
            ^^^^^^^^^^^^^^^^^^
-  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3637, in get
-    return self._get_impl(
-           ^^^^^^^^^^^^^^^
-  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3817, in _get_impl
-    return db_load_fn(
-           ^^^^^^^^^^^
-  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/orm/loading.py", line 694, in load_on_pk_identity
-    session.execute(
-  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2306, in execute
+  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/orm/scoping.py", line 1843, in scalar
+    return self._proxied.scalar(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2354, in scalar
     return self._execute_internal(
            ^^^^^^^^^^^^^^^^^^^^^^^
   File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2191, in _execute_internal
@@ -82,10 +59,88 @@ Traceback (most recent call last):
     self.dialect.do_execute(
   File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 919, in do_execute
     cursor.execute(statement, parameters)
-sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) SSL connection has been closed unexpectedly
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) relation "users" does not exist
+LINE 2: FROM users 
+             ^
 
-[SQL: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.password_hash AS users_password_hash 
+[SQL: SELECT users.id, users.username, users.email, users.password_hash 
 FROM users 
-WHERE users.id = %(pk_1)s]
-[parameters: {'pk_1': 1}]
-(Background on this error at: https://sqlalche.me/e/20/e3q8)
+WHERE users.username = %(username_1)s]
+[parameters: {'username_1': 'df'}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2024-05-28 22:28:05,765, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
+2024-05-28 22:28:08,778, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
+2024-05-28 22:28:09,588, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
+2024-06-01 16:17:19,890, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
+2024-06-01 18:09:11,306, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
+2024-06-01 18:10:39,740, ERROR: Exception on /login [POST] [in /Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/flask/app.py:1414]
+Traceback (most recent call last):
+  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1971, in _exec_single_context
+    self.dialect.do_execute(
+  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 919, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.UndefinedTable: relation "users" does not exist
+LINE 2: FROM users 
+             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/flask/app.py", line 2190, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/flask/app.py", line 1486, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/flask/app.py", line 1484, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/flask/app.py", line 1469, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lewis/Desktop/hill_tracker/app/routes.py", line 27, in login
+    user = db.session.scalar(
+           ^^^^^^^^^^^^^^^^^^
+  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/orm/scoping.py", line 1843, in scalar
+    return self._proxied.scalar(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2354, in scalar
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2191, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 293, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1422, in execute
+    return meth(
+           ^^^^^
+  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 514, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1644, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1850, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1990, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2357, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1971, in _exec_single_context
+    self.dialect.do_execute(
+  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 919, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.UndefinedTable) relation "users" does not exist
+LINE 2: FROM users 
+             ^
+
+[SQL: SELECT users.id, users.username, users.email, users.password_hash 
+FROM users 
+WHERE users.username = %(username_1)s]
+[parameters: {'username_1': 'test'}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2024-06-01 18:31:46,579, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]

@@ -1,11 +1,10 @@
-2024-05-19 12:33:01,135, ERROR: Exception on /hills [GET] [in /Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/flask/app.py:1414]
+2024-06-01 18:35:30,621, ERROR: Exception on /hills/new [GET] [in /Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/flask/app.py:1414]
 Traceback (most recent call last):
   File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1971, in _exec_single_context
     self.dialect.do_execute(
   File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 919, in do_execute
     cursor.execute(statement, parameters)
-psycopg2.OperationalError: SSL connection has been closed unexpectedly
-
+sqlite3.OperationalError: no such column: hill_info.difficulty
 
 The above exception was the direct cause of the following exception:
 
@@ -22,37 +21,15 @@ Traceback (most recent call last):
   File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/flask/app.py", line 1469, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/lewis/Desktop/hill_tracker/app/routes.py", line 59, in hills
-    hills = Hill.query.filter_by(user_id=current_user.id).all()
-                                         ^^^^^^^^^^^^^^^
-  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/werkzeug/local.py", line 311, in __get__
-    obj = instance._get_current_object()
-          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/werkzeug/local.py", line 515, in _get_current_object
-    return get_name(local())
-                    ^^^^^^^
-  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/flask_login/utils.py", line 25, in <lambda>
-    current_user = LocalProxy(lambda: _get_user())
-                                      ^^^^^^^^^^^
-  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/flask_login/utils.py", line 372, in _get_user
-    current_app.login_manager._load_user()
-  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/flask_login/login_manager.py", line 364, in _load_user
-    user = self._user_callback(user_id)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/lewis/Desktop/hill_tracker/app/models.py", line 15, in load_user
-    return db.session.get(User, int(id))
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/orm/scoping.py", line 1060, in get
-    return self._proxied.get(
-           ^^^^^^^^^^^^^^^^^^
-  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3637, in get
-    return self._get_impl(
-           ^^^^^^^^^^^^^^^
-  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 3817, in _get_impl
-    return db_load_fn(
-           ^^^^^^^^^^^
-  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/orm/loading.py", line 694, in load_on_pk_identity
-    session.execute(
+  File "/Users/lewis/Desktop/hill_tracker/app/routes.py", line 107, in add_new_hill
+    all_hills = HillInfo.query.all()
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 2673, in all
+    return self._iter().all()  # type: ignore
+           ^^^^^^^^^^^^
+  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/orm/query.py", line 2827, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
   File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2306, in execute
     return self._execute_internal(
            ^^^^^^^^^^^^^^^^^^^^^^^
@@ -82,40 +59,13 @@ Traceback (most recent call last):
     self.dialect.do_execute(
   File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 919, in do_execute
     cursor.execute(statement, parameters)
-sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) SSL connection has been closed unexpectedly
-
-[SQL: SELECT users.id AS users_id, users.username AS users_username, users.email AS users_email, users.password_hash AS users_password_hash 
-FROM users 
-WHERE users.id = %(pk_1)s]
-[parameters: {'pk_1': 1}]
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: hill_info.difficulty
+[SQL: SELECT hill_info.id AS hill_info_id, hill_info.title AS hill_info_title, hill_info.distance AS hill_info_distance, hill_info.height AS hill_info_height, hill_info.difficulty AS hill_info_difficulty, hill_info.latitude AS hill_info_latitude, hill_info.longitude AS hill_info_longitude 
+FROM hill_info]
 (Background on this error at: https://sqlalche.me/e/20/e3q8)
-2024-05-19 12:57:21,103, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
-2024-05-19 12:57:21,103, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
-2024-05-19 13:07:34,607, ERROR: Exception on /hills [GET] [in /Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/flask/app.py:1414]
-Traceback (most recent call last):
-  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/flask/app.py", line 2190, in wsgi_app
-    response = self.full_dispatch_request()
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/flask/app.py", line 1486, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/flask/app.py", line 1484, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/lewis/Desktop/hill_tracker/venv/lib/python3.12/site-packages/flask/app.py", line 1469, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/lewis/Desktop/hill_tracker/app/routes.py", line 59, in hills
-    hills = Hill.query.filter_by(user_id=current_user.id).all()
-                                         ^^^^^^^^^^^^^^^
-AttributeError: 'AnonymousUserMixin' object has no attribute 'id'
-2024-05-19 14:00:27,121, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
-2024-05-19 14:00:27,121, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
-2024-05-19 14:06:44,527, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
-2024-05-19 14:06:44,543, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
-2024-05-19 14:07:49,305, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
-2024-05-19 14:07:49,360, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
-2024-05-19 14:11:50,654, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
-2024-05-19 14:11:50,742, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
-2024-05-19 21:33:29,405, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
-2024-05-19 21:33:29,405, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
+2024-06-01 18:35:42,650, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
+2024-06-01 18:35:48,976, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
+2024-06-01 18:36:01,533, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
+2024-06-01 18:36:07,066, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
+2024-06-01 18:36:10,957, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
+2024-06-01 20:58:49,604, INFO: startup [in /Users/lewis/Desktop/hill_tracker/app/__init__.py:29]
